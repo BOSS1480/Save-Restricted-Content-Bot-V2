@@ -1,17 +1,3 @@
-# ---------------------------------------------------
-# File Name: start.py
-# Description: A Pyrogram bot for downloading files from Telegram channels or groups 
-#              and uploading them back to Telegram.
-# Author: Gagan
-# GitHub: https://github.com/devgaganin/
-# Telegram: https://t.me/team_spy_pro
-# YouTube: https://youtube.com/@dev_gagan
-# Created: 2025-01-11
-# Last Modified: 2025-01-11
-# Version: 2.0.5
-# License: MIT License
-# ---------------------------------------------------
-
 from pyrogram import filters
 from devgagan import app
 from config import OWNER_ID
@@ -65,52 +51,50 @@ async def set(_, message):
  
 help_pages = [
     (
-        "📝 **Bot Commands Overview (1/2)**:\n\n"
+        "📝 **סקירה של פקודות הבוט (1/2)**:\n\n"
         "1. **/add userID**\n"
-        "> Add user to premium (Owner only)\n\n"
+        "> הוסף משתמש לפרימיום (רק למנהל)\n\n"
         "2. **/rem userID**\n"
-        "> Remove user from premium (Owner only)\n\n"
+        "> הסר משתמש מפרימיום (רק למנהל)\n\n"
         "3. **/transfer userID**\n"
-        "> Transfer premium to your beloved major purpose for resellers (Premium members only)\n\n"
+        "> העבר פרימיום למטרה העיקרית האהובה שלך עבור משווקים (רק לחברי פרימיום)\n\n"
         "4. **/get**\n"
-        "> Get all user IDs (Owner only)\n\n"
+        "> קבל את כל מזהי המשתמשים (רק למנהל)\n\n"
         "5. **/lock**\n"
-        "> Lock channel from extraction (Owner only)\n\n"
+        "> נעל את הערוץ מפני הוצאה (רק למנהל)\n\n"
         "6. **/dl link**\n"
-        "> Download videos (Not available in v3 if you are using)\n\n"
+        "> הורד סרטונים (לא זמין בגרסה 3 אם אתה משתמש)\n\n"
         "7. **/adl link**\n"
-        "> Download audio (Not available in v3 if you are using)\n\n"
+        "> הורד אודיו (לא זמין בגרסה 3 אם אתה משתמש)\n\n"
         "8. **/login**\n"
-        "> Log into the bot for private channel access\n\n"
+        "> התחבר לבוט לגישה לערוץ פרטי\n\n"
         "9. **/batch**\n"
-        "> Bulk extraction for posts (After login)\n\n"
+        "> הוצאה קבוצתית להודעות (לאחר ההתחברות)\n\n"
     ),
     (
-        "📝 **Bot Commands Overview (2/2)**:\n\n"
+        "📝 **סקירה של פקודות הבוט (2/2)**:\n\n"
         "10. **/logout**\n"
-        "> Logout from the bot\n\n"
+        "> התנתק מהבוט\n\n"
         "11. **/stats**\n"
-        "> Get bot stats\n\n"
+        "> קבל סטטיסטיקות על הבוט\n\n"
         "12. **/plan**\n"
-        "> Check premium plans\n\n"
-        "13. **/speedtest**\n"
-        "> Test the server speed (not available in v3)\n\n"
-        "14. **/terms**\n"
-        "> Terms and conditions\n\n"
-        "15. **/cancel**\n"
-        "> Cancel ongoing batch process\n\n"
-        "16. **/myplan**\n"
-        "> Get details about your plans\n\n"
-        "17. **/session**\n"
-        "> Generate Pyrogram V2 session\n\n"
-        "18. **/settings**\n"
-        "> 1. SETCHATID : To directly upload in channel or group or user's dm use it with -100[chatID]\n"
-        "> 2. SETRENAME : To add custom rename tag or username of your channels\n"
-        "> 3. CAPTION : To add custom caption\n"
-        "> 4. REPLACEWORDS : Can be used for words in deleted set via REMOVE WORDS\n"
-        "> 5. RESET : To set the things back to default\n\n"
-        "> You can set CUSTOM THUMBNAIL, PDF WATERMARK, VIDEO WATERMARK, SESSION-based login, etc. from settings\n\n"
-        "**__Powered by Team SPY__**"
+        "> בדוק תוכניות פרימיום\n\n"
+        "13. **/terms**\n"
+        "> תנאים והגבלות\n\n"
+        "14. **/cancel**\n"
+        "> בטל תהליך קבוצתי בהמשך\n\n"
+        "15. **/myplan**\n"
+        "> קבל פרטים על התוכניות שלך\n\n"
+        "16. **/session**\n"
+        "> צור סשן Pyrogram V2\n\n"
+        "17. **/settings**\n"
+        "> 1. SETCHATID : כדי להעלות ישירות לקבוצה או לערוץ או לדו-שיח של משתמש השתמש בזה עם -100[chatID]\n"
+        "> 2. SETRENAME : כדי להוסיף תג מותאם אישית או שם משתמש לערוצים שלך\n"
+        "> 3. CAPTION : כדי להוסיף כותרת מותאמת אישית\n"
+        "> 4. REPLACEWORDS : יכול לשמש למילים שנמחקו דרך REMOVE WORDS\n"
+        "> 5. RESET : על מנת להחזיר את הדברים לברירת המחדל\n\n"
+        "> אתה יכול להגדיר תצוגה מקדימה מותאמת אישית, סימן מים ל-PDF, סימן מים לסרטון, כניסה מבוססת סשן, וכו' מתוך ההגדרות\n\n"
+        "**__מנוהל על ידי צוות @bot_sratim_sdarot__**"
     )
 ]
  
@@ -120,8 +104,8 @@ async def send_or_edit_help_page(_, message, page_number):
         return
  
      
-    prev_button = InlineKeyboardButton("◀️ Previous", callback_data=f"help_prev_{page_number}")
-    next_button = InlineKeyboardButton("Next ▶️", callback_data=f"help_next_{page_number}")
+    prev_button = InlineKeyboardButton("◀️", callback_data=f"help_prev_{page_number}")
+    next_button = InlineKeyboardButton("▶️", callback_data=f"help_next_{page_number}")
  
      
     buttons = []
@@ -175,16 +159,15 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 @app.on_message(filters.command("terms") & filters.private)
 async def terms(client, message):
     terms_text = (
-        "> 📜 **Terms and Conditions** 📜\n\n"
-        "✨ We are not responsible for user deeds, and we do not promote copyrighted content. If any user engages in such activities, it is solely their responsibility.\n"
-        "✨ Upon purchase, we do not guarantee the uptime, downtime, or the validity of the plan. __Authorization and banning of users are at our discretion; we reserve the right to ban or authorize users at any time.__\n"
-        "✨ Payment to us **__does not guarantee__** authorization for the /batch command. All decisions regarding authorization are made at our discretion and mood.\n"
-    )
+        "> 📜 **תנאים והגבלות** 📜\n\n"
+        "✨ אנו לא אחראים למעשים של המשתמשים, ואנו לא מקדמים תוכן המוגן בזכויות יוצרים. אם משתמש כלשהו עוסק בפעילויות כאלה, זו אחריותו בלבד.\n"
+        "✨ עם הרכישה, אנו לא מבטיחים את זמינותו, הפסקתו או לתוקפן של התוכנית. __ההרשאה וההשעיה של משתמשים הן לפי שיקול דעתנו; אנו שומרים על הזכות להשעות או להרשות משתמשים בכל עת.__\n"
+        "✨ התשלום אלינו **__לא מבטיח__** הרשאה לפקודת /batch. כל ההחלטות בנוגע להרשאה מתקבלות לפי שיקול דעתנו ומצב רוחנו.\n"
      
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📋 See Plans", callback_data="see_plan")],
-            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/kingofpatal")],
+            [InlineKeyboardButton("📋 צפה בתוכניות", callback_data="see_plan")],
+            [InlineKeyboardButton("💬 צור קשר עם המנהל", url="https://t.me/boss148bot")],
         ]
     )
     await message.reply_text(terms_text, reply_markup=buttons)
@@ -192,18 +175,19 @@ async def terms(client, message):
  
 @app.on_message(filters.command("plan") & filters.private)
 async def plan(client, message):
+ 
     plan_text = (
-        "> 💰 **Premium Price**:\n\n Starting from $2 or 200 INR accepted via **__Amazon Gift Card__** (terms and conditions apply).\n"
-        "📥 **Download Limit**: Users can download up to 100,000 files in a single batch command.\n"
-        "🛑 **Batch**: You will get two modes /bulk and /batch.\n"
-        "   - Users are advised to wait for the process to automatically cancel before proceeding with any downloads or uploads.\n\n"
-        "📜 **Terms and Conditions**: For further details and complete terms and conditions, please send /terms.\n"
+        "> 💰מחיר פרימיום\n\n המחיר הוא 30 ש\"ח לחודש דרך פייפאל.\n"
+        "📥 מגבלת הורדה: משתמשים יכולים להוריד עד 100,000 קבצים בפקודת batch אחת.\n"
+        "🛑 קבוצתית: תוכל לקבל שני מצבים /bulk ו-/batch.\n"
+        "   - משתמשים מתבקשים להמתין שההליך יתקף באופן אוטומטי לפני שהמשתמשים יתחילו בהורדות או העלאות כלשהן.\n\n"
+        "📜 תנאים והגבלות: לפרטים נוספים ולתנאים והגבלות המלאים, אנא שלח /terms או לחץ על ראה תנאים👇\n"
     )
      
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📜 See Terms", callback_data="see_terms")],
-            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/kingofpatal")],
+            [InlineKeyboardButton("📜 צפה בתוכניות", callback_data="see_terms")],
+            [InlineKeyboardButton("💬 צור קשר עם המנהל", url="https://t.me/boss148bot")],
         ]
     )
     await message.reply_text(plan_text, reply_markup=buttons)
@@ -212,17 +196,17 @@ async def plan(client, message):
 @app.on_callback_query(filters.regex("see_plan"))
 async def see_plan(client, callback_query):
     plan_text = (
-        "> 💰**Premium Price**\n\n Starting from $2 or 200 INR accepted via **__Amazon Gift Card__** (terms and conditions apply).\n"
-        "📥 **Download Limit**: Users can download up to 100,000 files in a single batch command.\n"
-        "🛑 **Batch**: You will get two modes /bulk and /batch.\n"
-        "   - Users are advised to wait for the process to automatically cancel before proceeding with any downloads or uploads.\n\n"
-        "📜 **Terms and Conditions**: For further details and complete terms and conditions, please send /terms or click See Terms👇\n"
+        "> 💰מחיר פרימיום\n\n המחיר הוא 30 ש\"ח לחודש דרך פייפאל.\n"
+        "📥 מגבלת הורדה: משתמשים יכולים להוריד עד 100,000 קבצים בפקודת batch אחת.\n"
+        "🛑 קבוצתית: תוכל לקבל שני מצבים /bulk ו-/batch.\n"
+        "   - משתמשים מתבקשים להמתין שההליך יתקף באופן אוטומטי לפני שהמשתמשים יתחילו בהורדות או העלאות כלשהן.\n\n"
+        "📜 תנאים והגבלות: לפרטים נוספים ולתנאים והגבלות המלאים, אנא שלח /terms או לחץ על ראה תנאים👇\n"
     )
      
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📜 See Terms", callback_data="see_terms")],
-            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/kingofpatal")],
+            [InlineKeyboardButton("📜 צפה בתוכניות", callback_data="see_terms")],
+            [InlineKeyboardButton("💬 צור קשר עם המנהל", url="https://t.me/boss148bot")],
         ]
     )
     await callback_query.message.edit_text(plan_text, reply_markup=buttons)
@@ -231,16 +215,15 @@ async def see_plan(client, callback_query):
 @app.on_callback_query(filters.regex("see_terms"))
 async def see_terms(client, callback_query):
     terms_text = (
-        "> 📜 **Terms and Conditions** 📜\n\n"
-        "✨ We are not responsible for user deeds, and we do not promote copyrighted content. If any user engages in such activities, it is solely their responsibility.\n"
-        "✨ Upon purchase, we do not guarantee the uptime, downtime, or the validity of the plan. __Authorization and banning of users are at our discretion; we reserve the right to ban or authorize users at any time.__\n"
-        "✨ Payment to us **__does not guarantee__** authorization for the /batch command. All decisions regarding authorization are made at our discretion and mood.\n"
-    )
+        "> 📜 **תנאים והגבלות** 📜\n\n"
+        "✨ אנו לא אחראים למעשים של המשתמשים, ואנו לא מקדמים תוכן המוגן בזכויות יוצרים. אם משתמש כלשהו עוסק בפעילויות כאלה, זו אחריותו בלבד.\n"
+        "✨ עם הרכישה, אנו לא מבטיחים את זמינותו, הפסקתו או לתוקפן של התוכנית. __ההרשאה וההשעיה של משתמשים הן לפי שיקול דעתנו; אנו שומרים על הזכות להשעות או להרשות משתמשים בכל עת.__\n"
+        "✨ התשלום אלינו **__לא מבטיח__** הרשאה לפקודת /batch. כל ההחלטות בנוגע להרשאה מתקבלות לפי שיקול דעתנו ומצב רוחנו.\n"
      
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📋 See Plans", callback_data="see_plan")],
-            [InlineKeyboardButton("💬 Contact Now", url="https://t.me/kingofpatal")],
+            [InlineKeyboardButton("📋 צפה בתוכניות", callback_data="see_plan")],
+            [InlineKeyboardButton("💬 צור קשר עם המנהל", url="https://t.me/boss148bot")],
         ]
     )
     await callback_query.message.edit_text(terms_text, reply_markup=buttons)
