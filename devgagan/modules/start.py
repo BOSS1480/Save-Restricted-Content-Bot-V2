@@ -1,3 +1,17 @@
+# ---------------------------------------------------
+# File Name: start.py
+# Description: A Pyrogram bot for downloading files from Telegram channels or groups 
+#              and uploading them back to Telegram.
+# Author: Gagan
+# GitHub: https://github.com/devgaganin/
+# Telegram: https://t.me/team_spy_pro
+# YouTube: https://youtube.com/@dev_gagan
+# Created: 2025-01-11
+# Last Modified: 2025-01-11
+# Version: 2.0.5
+# License: MIT License
+# ---------------------------------------------------
+
 from pyrogram import filters
 from devgagan import app
 from config import OWNER_ID
@@ -31,12 +45,10 @@ async def set(_, message):
         BotCommand("myplan", "⌛ Get your plan details"),
         BotCommand("add", "➕ Add user to premium"),
         BotCommand("rem", "➖ Remove from premium"),
-        BotCommand("session", "🧵 Generate Pyrogramv2 session"),
         BotCommand("settings", "⚙️ Personalize things"),
         BotCommand("stats", "📊 Get stats of the bot"),
         BotCommand("plan", "🗓️ Check our premium plans"),
         BotCommand("terms", "🥺 Terms and conditions"),
-        BotCommand("speedtest", "🚅 Speed of server"),
         BotCommand("get", "🗄️ Get all user IDs"),
         BotCommand("lock", "🔒 Protect channel from extraction"),
         BotCommand("gcast", "⚡ Broadcast message to bot users"),
@@ -104,8 +116,8 @@ async def send_or_edit_help_page(_, message, page_number):
         return
  
      
-    prev_button = InlineKeyboardButton("◀️", callback_data=f"help_prev_{page_number}")
-    next_button = InlineKeyboardButton("▶️", callback_data=f"help_next_{page_number}")
+    prev_button = InlineKeyboardButton("◀️ הקודם", callback_data=f"help_prev_{page_number}")
+    next_button = InlineKeyboardButton("הבא ▶️", callback_data=f"help_next_{page_number}")
  
      
     buttons = []
@@ -163,11 +175,12 @@ async def terms(client, message):
         "✨ אנו לא אחראים למעשים של המשתמשים, ואנו לא מקדמים תוכן המוגן בזכויות יוצרים. אם משתמש כלשהו עוסק בפעילויות כאלה, זו אחריותו בלבד.\n"
         "✨ עם הרכישה, אנו לא מבטיחים את זמינותו, הפסקתו או לתוקפן של התוכנית. __ההרשאה וההשעיה של משתמשים הן לפי שיקול דעתנו; אנו שומרים על הזכות להשעות או להרשות משתמשים בכל עת.__\n"
         "✨ התשלום אלינו **__לא מבטיח__** הרשאה לפקודת /batch. כל ההחלטות בנוגע להרשאה מתקבלות לפי שיקול דעתנו ומצב רוחנו.\n"
-    )
+)
+     
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📋 צפה בתוכניות", callback_data="see_plan")],
-            [InlineKeyboardButton("💬 צור קשר עם המנהל", url="https://t.me/boss148bot")],
+            [InlineKeyboardButton("📋 ראה תוכניות", callback_data="see_plan")],
+            [InlineKeyboardButton("💬 צור קשר עכשיו", url="https://t.me/boss148bot")],
         ]
     )
     await message.reply_text(terms_text, reply_markup=buttons)
@@ -175,19 +188,18 @@ async def terms(client, message):
  
 @app.on_message(filters.command("plan") & filters.private)
 async def plan(client, message):
- 
     plan_text = (
         "> 💰מחיר פרימיום\n\n המחיר הוא 30 ש\"ח לחודש דרך פייפאל.\n"
         "📥 מגבלת הורדה: משתמשים יכולים להוריד עד 100,000 קבצים בפקודת batch אחת.\n"
         "🛑 קבוצתית: תוכל לקבל שני מצבים /bulk ו-/batch.\n"
         "   - משתמשים מתבקשים להמתין שההליך יתקף באופן אוטומטי לפני שהמשתמשים יתחילו בהורדות או העלאות כלשהן.\n\n"
         "📜 תנאים והגבלות: לפרטים נוספים ולתנאים והגבלות המלאים, אנא שלח /terms או לחץ על ראה תנאים👇\n"
-    )
+)
      
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📜 צפה בתוכניות", callback_data="see_terms")],
-            [InlineKeyboardButton("💬 צור קשר עם המנהל", url="https://t.me/boss148bot")],
+            [InlineKeyboardButton("📜 ראה תוכנית", callback_data="see_terms")],
+            [InlineKeyboardButton("💬 צור קשר עכשיו", url="https://t.me/boss148bot")],
         ]
     )
     await message.reply_text(plan_text, reply_markup=buttons)
@@ -201,12 +213,12 @@ async def see_plan(client, callback_query):
         "🛑 קבוצתית: תוכל לקבל שני מצבים /bulk ו-/batch.\n"
         "   - משתמשים מתבקשים להמתין שההליך יתקף באופן אוטומטי לפני שהמשתמשים יתחילו בהורדות או העלאות כלשהן.\n\n"
         "📜 תנאים והגבלות: לפרטים נוספים ולתנאים והגבלות המלאים, אנא שלח /terms או לחץ על ראה תנאים👇\n"
-    )
+)
      
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📜 צפה בתוכניות", callback_data="see_terms")],
-            [InlineKeyboardButton("💬 צור קשר עם המנהל", url="https://t.me/boss148bot")],
+            [InlineKeyboardButton("📜 ראה תנאים", callback_data="see_terms")],
+            [InlineKeyboardButton("💬 צור קשר עכשיו", url="https://t.me/boss148bot")],
         ]
     )
     await callback_query.message.edit_text(plan_text, reply_markup=buttons)
@@ -217,16 +229,14 @@ async def see_terms(client, callback_query):
     terms_text = (
         "> 📜 **תנאים והגבלות** 📜\n\n"
         "✨ אנו לא אחראים למעשים של המשתמשים, ואנו לא מקדמים תוכן המוגן בזכויות יוצרים. אם משתמש כלשהו עוסק בפעילויות כאלה, זו אחריותו בלבד.\n"
-        "✨ עם הרכישה, אנו לא מבטיחים את זמינותו, הפסקתו או לתוקפן של התוכנית. __ההרשאה וההשעיה של משתמשים הן לפי שיקול דעתנו; אנו שומרים על הזכות להשעות או להרשות משתמשים בכל עת.__\n"
-        "✨ התשלום אלינו **__לא מבטיח__** הרשאה לפקודת /batch. כל ההחלטות בנוגע להרשאה מתקבלות לפי שיקול דעתנו ומצב רוחנו.\n"
-    )
- 
+        "✨ עם הרכישה, אנו לא מבטיחים את זמנות השירות, את זמני ההפסקה או את תקפות התוכנית. __ההרשאה וההשעיה של משתמשים הן לפי שיקול דעתנו; אנו שומרים על הזכות להשעות או להרשות משתמשים בכל עת.__\n"
+        "✨ תשלום אלינו **__לא מבטיח__** הרשאה לפקודת /batch. כל ההחלטות בנוגע להרשאה מתקבלות לפי שיקול דעתנו ומצב רוחנו.\n"
+)
+     
     buttons = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("📋 צפה בתוכניות", callback_data="see_plan")],
-            [InlineKeyboardButton("💬 צור קשר עם המנהל", url="https://t.me/boss148bot")],
+            [InlineKeyboardButton("📋 ראה תוכניות", callback_data="see_plan")],
+            [InlineKeyboardButton("💬 צור קשר עכשיו", url="https://t.me/boss148bot")],
         ]
     )
     await callback_query.message.edit_text(terms_text, reply_markup=buttons)
- 
- 
